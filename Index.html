@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luis Eduardo Martínez Tatis | HV Interactiva</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel-2: #1f2937;
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --accent: #38bdf8;
+      --accent-2: #22c55e;
+      --line: rgba(255,255,255,.12);
+      --card: rgba(255,255,255,.08);
+      --shadow: 0 18px 45px rgba(0,0,0,.28);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,.25), transparent 32%),
+        radial-gradient(circle at top right, rgba(34,197,94,.18), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(15,23,42,.82);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: .3px;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #04111f;
+      font-weight: 900;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      padding: 8px 10px;
+      border-radius: 999px;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255,255,255,.09);
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 78px 0 42px;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.07);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(38px, 6vw, 72px);
+      line-height: .95;
+      margin: 0 0 18px;
+      letter-spacing: -2px;
+    }
+
+    .gradient {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 19px;
+      max-width: 780px;
+      margin-bottom: 26px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.08);
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .16s ease, background .16s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.14);
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #03121f;
+      border: none;
+    }
+
+    .profile-card {
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-card::before {
+      content: "";
+      position: absolute;
+      inset: -80px -80px auto auto;
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      background: rgba(56,189,248,.25);
+    }
+
+    .avatar {
+      width: 128px;
+      height: 128px;
+      border-radius: 36px;
+      background: linear-gradient(135deg, rgba(56,189,248,.95), rgba(34,197,94,.90));
+      display: grid;
+      place-items: center;
+      color: #04111f;
+      font-size: 34px;
+      font-weight: 900;
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .card-title {
+      font-size: 24px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,.07);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 24px;
+    }
+
+    section {
+      padding: 44px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(28px, 3vw, 42px);
+      letter-spacing: -1px;
+    }
+
+    .section-note {
+      color: var(--muted);
+      max-width: 620px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card, details {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.16);
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 19px;
+    }
+
+    .card p, .card li, details p, details li {
+      color: var(--muted);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .tag {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(56,189,248,.12);
+      border: 1px solid rgba(56,189,248,.24);
+      color: #dff6ff;
+      font-size: 13px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    details {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 20px;
+      font-weight: 900;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    .summary-sub {
+      display: block;
+      color: var(--muted);
+      font-weight: 400;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    details .content {
+      border-top: 1px solid var(--line);
+      padding: 18px 20px 22px;
+    }
+
+    ul {
+      margin: 10px 0 0;
+      padding-left: 18px;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill {
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .contact-panel {
+      background: linear-gradient(135deg, rgba(56,189,248,.18), rgba(34,197,94,.12));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 22px;
+      align-items: center;
+      box-shadow: var(--shadow);
+    }
+
+    footer {
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      padding: 28px 0 38px;
+      font-size: 14px;
+    }
+
+    .print-only { display: none; }
+
+    @media (max-width: 860px) {
+      .hero, .contact-panel { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr; }
+      nav { align-items: flex-start; padding: 12px 0; flex-direction: column; }
+      .nav-links { justify-content: flex-start; }
+    }
+
+    @media print {
+      body {
+        background: white;
+        color: #111827;
+      }
+
+      header, .actions, footer {
+        display: none;
+      }
+
+      .profile-card, .card, details, .contact-panel {
+        box-shadow: none;
+        background: white;
+        border: 1px solid #d1d5db;
+      }
+
+      .gradient {
+        color: #111827;
+        background: none;
+      }
+
+      .lead, .meta, .card p, .card li, details p, details li, .section-note {
+        color: #374151;
+      }
+
+      details .content {
+        display: block;
+      }
+
+      section, .hero {
+        padding: 18px 0;
+      }
+
+      .print-only { display: block; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="container">
+      <a class="brand" href="#inicio">
+        <span class="logo">LM</span>
+        <span>Luis Martínez</span>
+      </a>
+      <div class="nav-links">
+        <a href="#perfil">Perfil</a>
+        <a href="#experiencia">Experiencia</a>
+        <a href="#habilidades">Habilidades</a>
+        <a href="#formacion">Formación</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="inicio" class="container">
+    <section class="hero">
+      <div>
+        <div class="badge">Disponible para oportunidades en tecnología, soporte TI y educación</div>
+        <h1>Luis Eduardo<br><span class="gradient">Martínez Tatis</span></h1>
+        <p class="lead">
+          Analista de Soporte TI, Mesa de Ayuda N1/N2 y soporte de aplicativos institucionales.
+          Experiencia en gestión de usuarios, accesos, incidentes, redes, infraestructura, plataformas
+          y acompañamiento a usuarios. Estudiante de Ingeniería de Sistemas.
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="mailto:luiseduardo.martinez@gmail.com">Contactarme</a>
+          <a class="btn" href="https://www.linkedin.com/in/luis-martinez-091804b1" target="_blank" rel="noopener">Ver LinkedIn</a>
+          <button class="btn" onclick="window.print()">Guardar / imprimir PDF</button>
+        </div>
+      </div>
+
+      <aside class="profile-card">
+        <div class="avatar">LM</div>
+        <div class="card-title">Soporte TI con enfoque humano</div>
+        <p class="meta">
+          Bogotá, Colombia · Soporte técnico · Aplicativos institucionales · Docencia tecnológica
+        </p>
+        <div class="stats">
+          <div class="stat">
+            <strong>17+</strong>
+            <span class="meta">años en soporte TI</span>
+          </div>
+          <div class="stat">
+            <strong>5+</strong>
+            <span class="meta">años en docencia</span>
+          </div>
+          <div class="stat">
+            <strong>V</strong>
+            <span class="meta">semestre Ing. Sistemas</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="perfil">
+      <div class="section-head">
+        <h2>Perfil profesional</h2>
+        <p class="section-note">
+          Una síntesis clara para reclutadores, ATS y procesos de selección.
+        </p>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <h3>Soporte TI y mesa de ayuda</h3>
+          <p>
+            Atención de incidentes, requerimientos, diagnóstico técnico, soporte a usuarios,
+            instalación de software, configuración de equipos, periféricos, impresoras, escáneres,
+            conectividad y VPN.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Aplicativos y accesos</h3>
+          <p>
+            Gestión de usuarios, roles, permisos, desbloqueos y restablecimiento de contraseñas
+            en plataformas institucionales como ORFEO, SIT, KLIC, CAS, SIG y correo institucional.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Educación y tecnología</h3>
+          <p>
+            Experiencia docente en tecnología, informática e inglés, con capacidad para explicar
+            temas técnicos de manera clara y acompañar procesos de alfabetización digital.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="experiencia">
+      <div class="section-head">
+        <h2>Experiencia</h2>
+        <p class="section-note">Haz clic en cada experiencia para desplegar funciones y palabras clave.</p>
+      </div>
+
+      <div class="timeline">
+        <details open>
+          <summary>
+            Agencia Nacional de Tierras – ANT
+            <span class="summary-sub">Contratista / Soporte TI – Subdirección de Seguridad Jurídica · 2024 – Actualidad</span>
+          </summary>
+          <div class="content">
+            <ul>
+              <li>Soporte técnico y funcional a usuarios internos en aplicativos institucionales.</li>
+              <li>Gestión de usuarios, accesos, roles, desbloqueos y restablecimiento de contraseñas.</li>
+              <li>Atención de solicitudes relacionadas con ORFEO, SIT, KLIC, CAS, SIG y correo institucional.</li>
+              <li>Seguimiento de incidentes y requerimientos reportados por usuarios.</li>
+              <li>Soporte en VPN, conectividad, impresoras, escáneres, equipos de cómputo y puntos de red.</li>
+              <li>Elaboración de reportes, consolidación de información y apoyo en control operativo.</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Soporte TI</span>
+              <span class="tag">Mesa de ayuda</span>
+              <span class="tag">ORFEO</span>
+              <span class="tag">SIT</span>
+              <span class="tag">KLIC</span>
+              <span class="tag">CAS</span>
+              <span class="tag">SIG</span>
+              <span class="tag">VPN</span>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            HelloSupport / Servicios independientes TI
+            <span class="summary-sub">Soporte técnico, infraestructura y servicios tecnológicos · 2014 – 2023</span>
+          </summary>
+          <div class="content">
+            <ul>
+              <li>Mantenimiento preventivo y correctivo de computadores, portátiles, impresoras y periféricos.</li>
+              <li>Instalación y configuración de sistemas operativos, antivirus, herramientas ofimáticas y software.</li>
+              <li>Repotenciación de equipos, cambio de piezas, recuperación de información y optimización.</li>
+              <li>Soporte en redes básicas, licencias, conectividad, servidores y soluciones tecnológicas.</li>
+              <li>Atención al cliente, diagnóstico de fallas y entrega de soluciones según necesidad.</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Mantenimiento</span>
+              <span class="tag">Redes</span>
+              <span class="tag">Licencias</span>
+              <span class="tag">Windows</span>
+              <span class="tag">Office</span>
+              <span class="tag">Antivirus</span>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            Experiencia docente
+            <span class="summary-sub">Docente de tecnología, informática e inglés</span>
+          </summary>
+          <div class="content">
+            <ul>
+              <li>Orientación de procesos formativos en tecnología, informática, herramientas digitales e inglés.</li>
+              <li>Diseño de actividades académicas relacionadas con competencias digitales.</li>
+              <li>Acompañamiento a estudiantes en alfabetización digital, ofimática y uso responsable de tecnología.</li>
+              <li>Manejo de grupos, comunicación efectiva y resolución de situaciones en entornos educativos.</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Docencia</span>
+              <span class="tag">Informática</span>
+              <span class="tag">Tecnología</span>
+              <span class="tag">Inglés</span>
+              <span class="tag">Educación digital</span>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section id="habilidades">
+      <div class="section-head">
+        <h2>Habilidades clave</h2>
+        <p class="section-note">Pensadas para búsquedas laborales y filtros ATS.</p>
+      </div>
+
+      <div class="skills">
+        <span class="skill">Soporte TI N1/N2</span>
+        <span class="skill">Mesa de ayuda</span>
+        <span class="skill">Gestión de incidentes</span>
+        <span class="skill">Gestión de requerimientos</span>
+        <span class="skill">Administración de usuarios</span>
+        <span class="skill">Roles y permisos</span>
+        <span class="skill">Soporte funcional</span>
+        <span class="skill">ORFEO</span>
+        <span class="skill">SIT</span>
+        <span class="skill">KLIC</span>
+        <span class="skill">CAS</span>
+        <span class="skill">SIG</span>
+        <span class="skill">Correo institucional</span>
+        <span class="skill">VPN</span>
+        <span class="skill">Redes básicas</span>
+        <span class="skill">Windows</span>
+        <span class="skill">Linux</span>
+        <span class="skill">Office 365</span>
+        <span class="skill">Impresoras y escáneres</span>
+        <span class="skill">Documentación técnica</span>
+        <span class="skill">Atención al usuario</span>
+      </div>
+    </section>
+
+    <section id="formacion">
+      <div class="section-head">
+        <h2>Formación y certificaciones</h2>
+        <p class="section-note">Formación académica y ruta de fortalecimiento técnico.</p>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <h3>Ingeniería de Sistemas</h3>
+          <p>Universidad INCCA de Colombia</p>
+          <p><strong>Estado:</strong> Actualmente en V semestre.</p>
+        </article>
+
+        <article class="card">
+          <h3>Licenciatura en Educación Tecnológica</h3>
+          <p>Énfasis en Informática.</p>
+          <p>Base profesional en educación, tecnología, pedagogía y herramientas digitales.</p>
+        </article>
+
+        <article class="card">
+          <h3>Linux y redes</h3>
+          <p>Introduction to Linux – LFS101, The Linux Foundation.</p>
+          <p>Formación en Linux y redes con Cisco en curso.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="contact-panel">
+        <div>
+          <h2>¿Hablamos?</h2>
+          <p class="section-note">
+            Abierto a oportunidades en soporte TI, mesa de ayuda, infraestructura,
+            soporte de aplicativos, tecnología educativa y docencia en informática.
+          </p>
+        </div>
+        <div class="actions">
+          <a class="btn primary" href="mailto:luiseduardo.martinez@gmail.com">Enviar correo</a>
+          <a class="btn" href="https://www.linkedin.com/in/luis-martinez-091804b1" target="_blank" rel="noopener">LinkedIn</a>
+          <button class="btn" onclick="window.print()">Descargar como PDF</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      HV interactiva de Luis Eduardo Martínez Tatis · Diseño web responsive · Lista para publicar en GitHub Pages, Netlify, Vercel, Notion o sitio propio.
+    </div>
+  </footer>
+
+  <script>
+    const cards = document.querySelectorAll('.card, details, .profile-card');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.animate(
+            [
+              { opacity: 0, transform: 'translateY(14px)' },
+              { opacity: 1, transform: 'translateY(0)' }
+            ],
+            { duration: 420, easing: 'ease-out', fill: 'both' }
+          );
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    cards.forEach(card => observer.observe(card));
+  </script>
+</body>
+</html>
